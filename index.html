@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carlos Abner - Desarrollador Cubista</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Georgia', serif;
+            line-height: 1.4;
+            background: linear-gradient(135deg, #f8f4e9 0%, #e8d4b8 100%);
+            color: #5a3921;
+            padding: 15px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+        }
+        
+        /* Bordes cubistas extremos */
+        header, nav, section, footer, .cuadrado, .rectangulo, .triangulo, .circulo, 
+        .proyecto, .info-box, .imagen-cubista, nav a, .letra-cubista, .boton-cubista {
+            border: 4px solid #8B0000;
+            box-shadow: 
+                6px 6px 0px #5a0000,
+                12px 12px 0px rgba(139, 0, 0, 0.3);
+        }
+        
+        /* Estilo cubista para encabezados */
+        h1, h2, h3 {
+            font-weight: normal;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            position: relative;
+            display: inline-block;
+            padding: 5px 15px;
+            background-color: #f9f3e9;
+            margin-bottom: 20px;
+        }
+        
+        h1 {
+            font-size: 2.8rem;
+            transform: rotate(-3deg) skew(-5deg);
+            border-width: 5px;
+        }
+        
+        h2 {
+            font-size: 2rem;
+            transform: rotate(2deg) skew(3deg);
+        }
+        
+        h3 {
+            font-size: 1.5rem;
+            transform: rotate(-1deg) skew(-2deg);
+        }
+        
+        p {
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+        
+        /* Estructuras principales con rotaciones cubistas */
+        header {
+            padding: 40px 30px;
+            text-align: center;
+            margin-bottom: 40px;
+            background-color: #f9f3e9;
+            transform: rotate(-1.5deg);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .nombre-destacado {
+            font-size: 3.5rem;
+            color: #8B0000;
+            margin-bottom: 10px;
+            display: block;
+            transform: rotate(-2deg) skew(-3deg);
+        }
+        
+        .especialidad {
+            font-size: 1.8rem;
+            font-style: italic;
+            margin-top: 15px;
+            display: block;
+            transform: rotate(1deg);
+        }
+        
+        nav {
+            padding: 20px;
+            margin-bottom: 40px;
+            background-color: #f9f3e9;
+            transform: rotate(1.2deg);
+        }
+        
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        nav li {
+            transform: rotate(var(--rotacion));
+        }
+        
+        nav a {
+            text-decoration: none;
+            color: #8B0000;
+            font-size: 1.2rem;
+            padding: 12px 20px;
+            display: block;
+            background-color: #f9f3e9;
+            text-transform: uppercase;
+            font-weight: bold;
+            letter-spacing: 1px;
+            transform: skew(-5deg);
+            transition: all 0.3s ease;
+        }
+        
+        nav a:hover {
+            background-color: #8B0000;
+            color: #f9f3e9;
+            transform: skew(5deg) scale(1.05);
+        }
+        
+        section {
+            padding: 30px;
+            margin-bottom: 40px;
+            background-color: #f9f3e9;
+            position: relative;
+            transform: rotate(0.8deg);
+        }
+        
+        .proyectos {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 25px;
+        }
+        
+        .proyecto {
+            padding: 25px;
+            min-height: 280px;
+            background-color: #f9f3e9;
+            position: relative;
+            transform: rotate(var(--proyecto-rotacion));
+        }
+        
+        footer {
+            padding: 30px;
+            text-align: center;
+            margin-top: 40px;
+            background-color: #f9f3e9;
+            transform: rotate(-0.7deg);
+        }
+        
+        /* Botones cubistas */
+        .boton-cubista {
+            display: inline-block;
+            padding: 15px 30px;
+            background-color: #f9f3e9;
+            color: #8B0000;
+            text-decoration: none;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin: 10px 5px;
+            transform: rotate(var(--boton-rotacion)) skew(-3deg);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            font-size: 1.1rem;
+        }
+        
+        .boton-cubista:hover {
+            background-color: #8B0000;
+            color: #f9f3e9;
+            transform: rotate(calc(var(--boton-rotacion) * -0.5)) skew(3deg) scale(1.1);
+        }
+        
+        .boton-destacado {
+            background-color: #8B0000;
+            color: #f9f3e9;
+            font-size: 1.3rem;
+            padding: 18px 35px;
+        }
+        
+        /* Elementos decorativos estilo cubista extremo */
+        .cuadrado {
+            width: 90px;
+            height: 90px;
+            position: absolute;
+            background-color: #f9f3e9;
+            z-index: 2;
+        }
+        
+        .rectangulo {
+            width: 140px;
+            height: 70px;
+            position: absolute;
+            background-color: #f9f3e9;
+            z-index: 2;
+        }
+        
+        .triangulo {
+            width: 0;
+            height: 0;
+            border-left: 60px solid transparent;
+            border-right: 60px solid transparent;
+            border-bottom: 120px solid #f9f3e9;
+            position: absolute;
+            z-index: 2;
+            border: none;
+        }
+        
+        .circulo {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            position: absolute;
+            background-color: #f9f3e9;
+            z-index: 2;
+        }
+        
+        /* Posiciones y rotaciones de elementos geométricos */
+        .cuadrado-1 {
+            top: 5%;
+            left: 3%;
+            transform: rotate(25deg);
+        }
+        
+        .cuadrado-2 {
+            bottom: 8%;
+            right: 5%;
+            transform: rotate(-15deg);
+        }
+        
+        .rectangulo-1 {
+            top: 12%;
+            right: 4%;
+            transform: rotate(-12deg);
+        }
+        
+        .rectangulo-2 {
+            bottom: 12%;
+            left: 2%;
+            transform: rotate(18deg);
+        }
+        
+        .triangulo-1 {
+            top: 8%;
+            left: 20%;
+            transform: rotate(35deg);
+        }
+        
+        .triangulo-2 {
+            bottom: 8%;
+            right: 15%;
+            transform: rotate(-25deg);
+        }
+        
+        .circulo-1 {
+            top: 3%;
+            right: 25%;
+            transform: rotate(10deg);
+        }
+        
+        .circulo-2 {
+            bottom: 3%;
+            left: 12%;
+            transform: rotate(-8deg);
+        }
+        
+        .cuadrado-3 {
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(20deg);
+        }
+        
+        /* Imágenes cubistas */
+        .imagen-cubista {
+            padding: 8px;
+            background-color: #f9f3e9;
+            position: relative;
+            margin: 20px 0;
+            transform: rotate(var(--imagen-rotacion));
+            overflow: hidden;
+        }
+        
+        .imagen-cubista img {
+            width: 100%;
+            height: auto;
+            display: block;
+            filter: contrast(110%) saturate(120%);
+        }
+        
+        /* Iconos FontAwesome cubistas */
+        .icono {
+            margin-right: 10px;
+            color: #8B0000;
+            transform: rotate(10deg) skew(-5deg);
+            display: inline-block;
+        }
+        
+        /* Cajas de información con estilo cubista */
+        .info-box {
+            padding: 20px;
+            margin: 15px 0;
+            background-color: #f9f3e9;
+            transform: rotate(var(--info-rotacion));
+        }
+        
+        /* Letras cubistas */
+        .letra-cubista {
+            display: inline-block;
+            padding: 8px 12px;
+            margin: 5px;
+            background-color: #f9f3e9;
+            transform: rotate(var(--letra-rotacion));
+        }
+        
+        .contacto-botones {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 25px;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .proyectos {
+                grid-template-columns: 1fr;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            nav li {
+                width: 90%;
+                margin: 8px 0;
+            }
+            
+            .cuadrado, .rectangulo, .triangulo, .circulo {
+                display: none;
+            }
+            
+            header, nav, section, footer, .proyecto, .info-box {
+                transform: none;
+            }
+            
+            h1, h2, h3 {
+                transform: none;
+                display: block;
+            }
+            
+            .imagen-cubista {
+                transform: none;
+            }
+            
+            .nombre-destacado {
+                font-size: 2.5rem;
+                transform: none;
+            }
+            
+            .contacto-botones {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .boton-cubista {
+                width: 80%;
+                text-align: center;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            body {
+                padding: 10px;
+            }
+            
+            header, section, footer {
+                padding: 20px;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            h2 {
+                font-size: 1.6rem;
+            }
+            
+            h3 {
+                font-size: 1.3rem;
+            }
+            
+            .nombre-destacado {
+                font-size: 2rem;
+            }
+            
+            .especialidad {
+                font-size: 1.4rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Elementos decorativos estilo cubista extremo -->
+        <div class="cuadrado cuadrado-1"></div>
+        <div class="cuadrado cuadrado-2"></div>
+        <div class="rectangulo rectangulo-1"></div>
+        <div class="rectangulo rectangulo-2"></div>
+        <div class="triangulo triangulo-1"></div>
+        <div class="triangulo triangulo-2"></div>
+        <div class="circulo circulo-1"></div>
+        <div class="circulo circulo-2"></div>
+        <div class="cuadrado cuadrado-3"></div>
+        
+        <header>
+            <span class="nombre-destacado">Carlos Abner</span>
+            <h1><i class="fas fa-palette icono"></i>Desarrollador Web</h1>
+            <span class="especialidad">Desarrollo páginas web únicas y vanguardistas</span>
+            
+            <div style="margin-top: 30px;">
+                <a href="#contacto" class="boton-cubista boton-destacado" style="--boton-rotacion: -2deg;">
+                    <i class="fas fa-rocket icono"></i>Contratar Mis Servicios
+                </a>
+                <a href="#proyectos" class="boton-cubista" style="--boton-rotacion: 3deg;">
+                    <i class="fas fa-eye icono"></i>Ver Mis Proyectos
+                </a>
+            </div>
+        </header>
+        
+        <nav>
+            <ul>
+                <li style="--rotacion: -3deg;"><a href="#inicio"><i class="fas fa-home icono"></i>Inicio</a></li>
+                <li style="--rotacion: 2deg;"><a href="#sobre-mi"><i class="fas fa-user icono"></i>Sobre Mí</a></li>
+                <li style="--rotacion: -1deg;"><a href="#proyectos"><i class="fas fa-paint-brush icono"></i>Proyectos</a></li>
+                <li style="--rotacion: 4deg;"><a href="#servicios"><i class="fas fa-cogs icono"></i>Servicios</a></li>
+                <li style="--rotacion: -2deg;"><a href="#contacto"><i class="fas fa-envelope icono"></i>Contacto</a></li>
+            </ul>
+        </nav>
+        
+        <section id="inicio">
+            <h2><i class="fas fa-chess-rook icono"></i>Exploración Cubista Digital</h2>
+            <p>Bienvenido a mi universo geométrico donde cada pixel es una expresión artística. Soy <strong>Carlos Abner</strong>, desarrollador especializado en crear experiencias web únicas que desafían las convenciones del diseño tradicional.</p>
+            
+            <div class="imagen-cubista" style="--imagen-rotacion: 2deg;">
+                <img src="https://images.unsplash.com/photo-1541961017774-22349e4a1262?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Composición cubista">
+            </div>
+            
+            <div style="text-align: center; margin-top: 25px;">
+                <a href="#contacto" class="boton-cubista" style="--boton-rotacion: -1deg;">
+                    <i class="fas fa-paper-plane icono"></i>Iniciar Proyecto
+                </a>
+            </div>
+        </section>
+        
+        <section id="sobre-mi">
+            <h2><i class="fas fa-address-card icono"></i>Deconstrucción Creativa</h2>
+            <p>Soy <strong>Carlos Abner</strong>, un desarrollador que encuentra belleza en la fragmentación. Mi trabajo desafía las perspectivas convencionales y explora la esencia de las formas a través de la descomposición geométrica aplicada al desarrollo web.</p>
+            
+            <div class="info-box" style="--info-rotacion: -2deg;">
+                <h3><i class="fas fa-tools icono"></i>Fragmentos Técnicos</h3>
+                <ul>
+                    <li>HTML5 & CSS3 Experimental</li>
+                    <li>JavaScript para Arte Generativo</li>
+                    <li>Diseño Responsive Desestructurado</li>
+                    <li>Composición Geométrica Avanzada</li>
+                </ul>
+            </div>
+            
+            <div class="info-box" style="--info-rotacion: 3deg;">
+                <h3><i class="fas fa-briefcase icono"></i>Experiencia Multidimensional</h3>
+                <ul>
+                    <li>+5 años revolucionando el diseño web</li>
+                    <li>Pionero en Interfaces Cubistas</li>
+                    <li>Especialista en Experiencias de Usuario Únicas</li>
+                    <li>Desarrollador Frontend Innovador</li>
+                </ul>
+            </div>
+        </section>
+        
+        <section id="servicios">
+            <h2><i class="fas fa-cogs icono"></i>Servicios Cubistas</h2>
+            <p>Ofrezco soluciones web únicas que combinan funcionalidad y arte en cada proyecto:</p>
+            
+            <div class="proyectos">
+                <div class="proyecto" style="--proyecto-rotacion: -3deg;">
+                    <h3><i class="fas fa-laptop-code icono"></i>Desarrollo Web</h3>
+                    <p>Páginas web personalizadas con identidad visual única y enfoque cubista.</p>
+                    <a href="#contacto" class="boton-cubista" style="--boton-rotacion: 2deg; margin-top: 15px;">
+                        Solicitar
+                    </a>
+                </div>
+                <div class="proyecto" style="--proyecto-rotacion: 1deg;">
+                    <h3><i class="fas fa-palette icono"></i>Diseño UI/UX</h3>
+                    <p>Interfaces de usuario innovadoras que desafían los estándares convencionales.</p>
+                    <a href="#contacto" class="boton-cubista" style="--boton-rotacion: -1deg; margin-top: 15px;">
+                        Solicitar
+                    </a>
+                </div>
+                <div class="proyecto" style="--proyecto-rotacion: -2deg;">
+                    <h3><i class="fas fa-mobile-alt icono"></i>Responsive Design</h3>
+                    <p>Diseños adaptables que mantienen su esencia cubista en todos los dispositivos.</p>
+                    <a href="#contacto" class="boton-cubista" style="--boton-rotacion: 3deg; margin-top: 15px;">
+                        Solicitar
+                    </a>
+                </div>
+            </div>
+        </section>
+        
+        <section id="proyectos">
+            <h2><i class="fas fa-project-diagram icono"></i>Proyectos Descompuestos</h2>
+            <div class="proyectos">
+                <div class="proyecto" style="--proyecto-rotacion: -4deg;">
+                    <h3><i class="fas fa-cube icono"></i>Galeria Fragmentada</h3>
+                    <p>Un espacio virtual donde las obras de arte se presentan desde múltiples ángulos simultáneamente.</p>
+                    <div class="imagen-cubista" style="--imagen-rotacion: 3deg;">
+                        <img src="https://images.unsplash.com/photo-1578301978693-85fa9c0320b9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Galería cubista">
+                    </div>
+                    <a href="#contacto" class="boton-cubista" style="--boton-rotacion: 1deg; margin-top: 15px;">
+                        Ver Detalles
+                    </a>
+                </div>
+                <div class="proyecto" style="--proyecto-rotacion: 2deg;">
+                    <h3><i class="fas fa-shapes icono"></i>Ecosistema Geométrico</h3>
+                    <p>Una plataforma interactiva para crear composiciones abstractas con formas básicas.</p>
+                    <div class="imagen-cubista" style="--imagen-rotacion: -2deg;">
+                        <img src="https://images.unsplash.com/photo-1550684848-fac1c5b4e853?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Formas geométricas">
+                    </div>
+                    <a href="#contacto" class="boton-cubista" style="--boton-rotacion: -2deg; margin-top: 15px;">
+                        Ver Detalles
+                    </a>
+                </div>
+            </div>
+        </section>
+        
+           <section id="contacto">
+            <h2><i class="fas fa-address-book icono"></i>Conectemos Geometrías</h2>
+            <p>¿Listo para desafiar las perspectivas convencionales? Contáctame para crear algo extraordinario juntos.</p>
+            
+            <div class="info-box" style="--info-rotacion: -3deg;">
+                <i class="fas fa-envelope icono"></i>Email: <strong>carlosabner@desarrollador.com</strong>
+            </div>
+            
+            <div class="info-box" style="--info-rotacion: 2deg;">
+                <i class="fas fa-phone icono"></i>Teléfono: +123 456 7890
+            </div>
+            
+            <div class="contacto-botones">
+                <a href="mailto:carlosabner@desarrollador.com" class="boton-cubista" style="--boton-rotacion: -1deg;">
+                    <i class="fas fa-envelope icono"></i>Enviar Email
+                </a>
+                <a href="https://wa.me/1234567890" class="boton-cubista" style="--boton-rotacion: 2deg;">
+                    <i class="fab fa-whatsapp icono"></i>WhatsApp
+                </a>
+                <a href="#contacto" class="boton-cubista" style="--boton-rotacion: -3deg;">
+                    <i class="fas fa-file-contract icono"></i>Solicitar Presupuesto
+                </a>
+            </div>
+        </section>
+        
+        <footer>
+            <p><i class="far fa-copyright icono"></i> 2023 Carlos Abner - Desarrollador Cubista</p>
+            <p style="margin-top: 10px;">Desarrollo páginas web únicas y vanguardistas</p>
+            <p style="margin-top: 15px;">
+                <i class="fab fa-html5 icono"></i>
+                <i class="fab fa-css3-alt icono"></i>
+                <i class="fab fa-js-square icono"></i>
+                <i class="fas fa-palette icono"></i>
+                <i class="fas fa-cube icono"></i>
+            </p>
+        </footer>
+    </div>
+</body>
+</html>
